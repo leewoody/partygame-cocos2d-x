@@ -13,6 +13,8 @@ public:
 
 	void menuCallBack(cocos2d::Ref* pSender);
 
+    CCMenu* game_center_menu;
+    
 	CCMenu* game_a_menu;
 	CCMenu* game_b_menu;
 	CCMenu* game_c_menu;
