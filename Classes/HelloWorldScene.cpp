@@ -2,6 +2,21 @@
 #include "SimpleAudioEngine.h"
 #include  "StartScene.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include <jni.h>
+//cocos2d/cocos/2d/platform/android/jni/JniHelper.cpp
+#include "../cocos2d/cocos/2d/platform/android/jni/JniHelper.h" //这里的路径要根据你工程的实际情况进行更改
+#include <android/log.h>
+
+#if 1
+#define  LOG_TAG    "JniHelper"
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#else
+#define  LOGD(...)
+#endif
+
+#endif
+
 USING_NS_CC;
 
 int HelloWorld::score = 0;
@@ -163,7 +178,43 @@ bool HelloWorld::init()
 	//************************************ Label **************************************
 	int width=visibleSize.width;
 	int height=visibleSize.height;
-	CCString* ns=CCString::createWithFormat("%d*%d origin:%d*%d",width,height,(int)origin.x,(int)origin.y);
+    CCString* uuid=CCString::createWithFormat("uuid:%d", (int)(CCRANDOM_0_1() * 6));
+    //做应用时很多时候都得获取到每个设备的机器码
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    JniMethodInfo minfo;
+    jobject jobj;
+    //getStaticMethodInfo方法是调用静态类的，也可以不用调用静态类的getMethodInfo
+    bool b = JniHelper::getStaticMethodInfo(minfo,
+                                            "org.cocos2dx.cpp.AppActivity", //类路径
+                                            "getUUID", //静态方法名
+                                            "()Ljava/lang/String;");//括号里的是参数，后面的是返回值。
+    log("CC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROID");
+    if(b)
+    {
+        std::string ret;
+        //std::string uuid;
+        
+        jstring jret = (jstring)minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
+        ret = JniHelper::jstring2string(jret);
+        minfo.env->DeleteLocalRef(jret);
+        minfo.env->DeleteLocalRef(minfo.classID);
+        //uuid =  ret;
+        //string 转 CCString
+        //std::string str = "123";
+        
+        //CCString* ns=CCString::createWithFormat("%s",str.c_str());
+
+        
+        uuid=CCString::createWithFormat("uuid:%s", ret.c_str());
+        
+    }
+    else
+    {
+        log("JniHelper::getMethodInfo error...");
+    }
+#endif
+    
+	CCString* ns=   CCString::createWithFormat("%d*%d origin2:%d*%d, %s",width,height,(int)origin.x,(int)origin.y, uuid->getCString());
 
 	 pLabel = CCLabelTTF::create(ns->getCString(), "Arial", 24);
     

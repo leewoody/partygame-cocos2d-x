@@ -487,7 +487,7 @@ void Console::commandResolution(int fd, const std::string& args)
                         "\t%d x %d (design resolution)\n"
                         "Resolution Policy: %d\n"
                         "Visible Rect:\n"
-                        "\torigin: %d x %d\n"
+                        "\torigin1: %d x %d\n"
                         "\tsize: %d x %d\n",
                   (int)points.width, (int)points.height,
                   (int)pixels.width, (int)pixels.height,

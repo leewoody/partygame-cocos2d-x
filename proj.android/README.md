@@ -85,3 +85,14 @@ If the last command results in sdk.dir missing error then do:
     $ android list target
     $ android update project -p . -t (id from step 6)
     $ android update project -p cocos2d/cocos/2d/platform/android/java/ -t (id from step 6)
+
+### my envirnment
+/Users/i_woodylee/android-sdk-macosx/tools/android list targets
+ant release
+/Users/i_woodylee/android-sdk-macosx/tools/android update project --path ./ --target 1 --subprojects
+/Users/i_woodylee/android-sdk-macosx/tools/android update project --path /Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/cocos2d/cocos/2d/platform/android/java --target 1  --subprojects
+/Users/i_woodylee/android-sdk-macosx/tools/android update project --path ./ --target 1 --subprojects
+python build_native.py
+export NDK_ROOT=/Users/i_woodylee/android-ndk-r9d
+/Users/i_woodylee/android-ndk-r9d/ndk-build -j1 -C /Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/proj.android NDK_MODULE_PATH=/Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/proj.android/../cocos2d:/Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/proj.android/../cocos2d/external:/Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/proj.android/../cocos2d/cocos
+cd /Volumes/Transcend/_Fet-work/Open_src/partygame-cocos2d-x/proj.android
