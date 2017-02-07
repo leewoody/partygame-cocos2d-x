@@ -13,6 +13,8 @@ public:
 
 	void menuCallBack(cocos2d::Ref* pSender);
 
+    Size visibleSize;
+    
     CCMenu* game_center_menu;
     
 	CCMenu* game_a_menu;
@@ -20,6 +22,9 @@ public:
 	CCMenu* game_c_menu;
 	CCMenu* game_start_menu;
 
+    CCMenu* gameInfoMenu;
+    
+    
 	CREATE_FUNC(StartScene);
 };
 #endif

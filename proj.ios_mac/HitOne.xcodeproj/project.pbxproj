@@ -59,6 +59,11 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		888BC76C1E49BAC90005A33C /* LoginScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 888BC76A1E49BAC90005A33C /* LoginScene.cpp */; };
+		888BC7731E49C67F0005A33C /* green_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC76F1E49C67F0005A33C /* green_edit.png */; };
+		888BC7741E49C67F0005A33C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7701E49C67F0005A33C /* Icon.png */; };
+		888BC7751E49C67F0005A33C /* orange_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7711E49C67F0005A33C /* orange_edit.png */; };
+		888BC7761E49C67F0005A33C /* yellow_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7721E49C67F0005A33C /* yellow_edit.png */; };
 		88AB63C31E1CE7290021E1B3 /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AD1E1CE7290021E1B3 /* Animal.cpp */; };
 		88AB63C41E1CE7290021E1B3 /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AD1E1CE7290021E1B3 /* Animal.cpp */; };
 		88AB63C51E1CE7290021E1B3 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AF1E1CE7290021E1B3 /* AppDelegate.cpp */; };
@@ -338,6 +343,12 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		888BC76A1E49BAC90005A33C /* LoginScene.cpp */ = {isa = PBXFileReference; fileEncoding = 2147483673; lastKnownFileType = sourcecode.cpp.cpp; name = LoginScene.cpp; path = ../Classes/LoginScene.cpp; sourceTree = "<group>"; };
+		888BC76B1E49BAC90005A33C /* LoginScene.h */ = {isa = PBXFileReference; fileEncoding = 2147483673; lastKnownFileType = sourcecode.c.h; name = LoginScene.h; path = ../Classes/LoginScene.h; sourceTree = "<group>"; };
+		888BC76F1E49C67F0005A33C /* green_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_edit.png; sourceTree = "<group>"; };
+		888BC7701E49C67F0005A33C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		888BC7711E49C67F0005A33C /* orange_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange_edit.png; sourceTree = "<group>"; };
+		888BC7721E49C67F0005A33C /* yellow_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_edit.png; sourceTree = "<group>"; };
 		88AB63AD1E1CE7290021E1B3 /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
 		88AB63AE1E1CE7290021E1B3 /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
 		88AB63AF1E1CE7290021E1B3 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -497,6 +508,8 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				888BC76A1E49BAC90005A33C /* LoginScene.cpp */,
+				888BC76B1E49BAC90005A33C /* LoginScene.h */,
 				88AB63AD1E1CE7290021E1B3 /* Animal.cpp */,
 				88AB63AE1E1CE7290021E1B3 /* Animal.h */,
 				88AB63AF1E1CE7290021E1B3 /* AppDelegate.cpp */,
@@ -635,6 +648,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				888BC76F1E49C67F0005A33C /* green_edit.png */,
+				888BC7701E49C67F0005A33C /* Icon.png */,
+				888BC7711E49C67F0005A33C /* orange_edit.png */,
+				888BC7721E49C67F0005A33C /* yellow_edit.png */,
 				88AB66351E1CEC020021E1B3 /* cards */,
 				88AB66361E1CEC020021E1B3 /* fonts */,
 				88AB66371E1CEC020021E1B3 /* vision */,
@@ -884,6 +901,7 @@
 				88AB654A1E1CEAD10021E1B3 /* game_b_item.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				88AB65571E1CEAD10021E1B3 /* hit_2.png in Resources */,
+				888BC7751E49C67F0005A33C /* orange_edit.png in Resources */,
 				88AB65C51E1CEAD10021E1B3 /* SolidVertexShader.vsh in Resources */,
 				88AB652A1E1CEAD10021E1B3 /* bg_start.wav in Resources */,
 				88AB65401E1CEAD10021E1B3 /* CloseNormal.png in Resources */,
@@ -894,7 +912,9 @@
 				88AB65441E1CEAD10021E1B3 /* Continue1.png in Resources */,
 				88AB654C1E1CEAD10021E1B3 /* game_c_item.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				888BC7741E49C67F0005A33C /* Icon.png in Resources */,
 				88AB66391E1CEC020021E1B3 /* fonts in Resources */,
+				888BC7761E49C67F0005A33C /* yellow_edit.png in Resources */,
 				88AB652B1E1CEAD10021E1B3 /* bg_white.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				88AB652E1E1CEAD10021E1B3 /* bg2.png in Resources */,
@@ -906,6 +926,7 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				88AB65261E1CEAD10021E1B3 /* bg_b.png in Resources */,
+				888BC7731E49C67F0005A33C /* green_edit.png in Resources */,
 				88AB65271E1CEAD10021E1B3 /* bg_c.png in Resources */,
 				88AB653F1E1CEAD10021E1B3 /* click.wav in Resources */,
 				88AB65421E1CEAD10021E1B3 /* confirm.png in Resources */,
@@ -973,6 +994,7 @@
 				88AB63DA1E1CE8770021E1B3 /* env_posix.c in Sources */,
 				88AB63CB1E1CE7290021E1B3 /* CXmlStream.cpp in Sources */,
 				88AB63C71E1CE7290021E1B3 /* Card.cpp in Sources */,
+				888BC76C1E49BAC90005A33C /* LoginScene.cpp in Sources */,
 				88AB63D71E1CE7290021E1B3 /* VisionScene.cpp in Sources */,
 				88AB63CD1E1CE7290021E1B3 /* DragScene.cpp in Sources */,
 				88AB63D51E1CE7290021E1B3 /* TimeBar.cpp in Sources */,

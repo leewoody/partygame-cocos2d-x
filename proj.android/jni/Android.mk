@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/DragScene.cpp\
                    ../../Classes/StartScene.cpp\
                     ../../Classes/VisionScene.cpp\
+                    ../../Classes/LoginScene.cpp\
                     ../../Classes/CollisionDetection.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
