@@ -5,8 +5,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
-#include "cocos-ext.h"
-using namespace cocos2d::extension;
 
 USING_NS_CC;
 

@@ -1,5 +1,6 @@
 #include "LoginScene.h"
 #include "StartScene.h"
+#include "CXmlStream.h"
 
 USING_NS_CC;
 
@@ -46,6 +47,23 @@ bool Login::init()
 	CCSize editBoxSize = CCSizeMake(mysize.width /10, 60);
 
 
+    CCSprite* spBackground_01 = CCSprite::create("bg_b.png");
+    spBackground_01->setAnchorPoint(ccp(0, 0));
+    spBackground_01->setPosition(ccp(origin.x, origin.y));
+    //spBackground_01->setScale(1);
+    //spBackground_01->setVisible(false);
+    this->addChild(spBackground_01, 0);
+    
+    CCSprite* stateBar = CCSprite::create("StateBar.png");
+    //stateBar->setAnchorPoint(ccp(0.5,0));
+    stateBar->setVisible(true);
+    CCPoint STATE_BAR_POSITION = ccp(visibleSize.width / 2 + origin.x, visibleSize.height - stateBar->getContentSize().height / 2);
+    stateBar->setPosition(STATE_BAR_POSITION);
+    //stateBar->setScale(1.5f);
+    //stateBar->setTextureRect(CCRectMake(0,0,300,200));
+    this->addChild(stateBar, 1);
+
+    
 //ÓÃ»§ÃûeditBoxName
 	EditBox* editBoxName = EditBox::create(editBoxSize, Scale9Sprite::create("green_edit.png"));
 	editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
@@ -118,6 +136,15 @@ bool Login::init()
     confirmMenu->setVisible(true);
     this->addChild(confirmMenu, 2);
 
+    //********************************** initialize the question label **********************************
+    questionLabel = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question2.xml","question_01"), "Arial", 36);
+    questionLabel->setAnchorPoint(ccp(0,1));
+    questionLabel->setPosition(ccp(70, 500));
+    questionLabel->setHorizontalAlignment(TextHAlignment::LEFT);
+    questionLabel->setDimensions(CCSize(300, 300));
+    questionLabel->setColor(ccc3(0, 0, 0));
+    this->addChild(questionLabel, 2);
+    
 	return true;
 }
 

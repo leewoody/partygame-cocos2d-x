@@ -19,6 +19,9 @@ public:
 	
     Size visibleSize;
     
+    //question label
+    cocos2d::CCLabelTTF* questionLabel;
+
     CCMenu* exitMenu;
     CCMenu* confirmMenu;
     
