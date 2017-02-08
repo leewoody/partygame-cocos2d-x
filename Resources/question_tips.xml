@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dict>
+	    <key>question_01</key>
+	    <string>Device 認證過後, 輸入帳密即可獲取你的健康存摺點數！</string>
+	    <key>question_02</key>
+	    <string>1. 「健康到有春」是一款結合健保署「健康存摺」及手機遊戲概念的創意APP，希望透過遊戲讓民眾珍惜健保資源並關心個人健康。\n
+2. 使用前需先下載安裝健保署官方APP「全民健保行動快易通」並完成「裝置認證」手續。\n
+3. 啟啟動後請先按「登入健康存摺」鈕並輸入帳號/密碼，系統會自動帶出您上個月就醫資料及使用的健保點數。\n
+4. 本APP內提供「手眼協調」、「視覺空間」、「感覺統合」等三款融入健康概念的遊戲。\n
+5. 遊戲需在規定時間內完成才可晉級，而計時器的快慢取決於您上個月使用的健保點數，使用愈多的健保點數則時間愈短，晉級的難度就愈高。\n
+6. 想快速晉級嗎？記得多運動少看病，珍惜健保資源，全民更健康！</string>
+	    <key>question_03</key>
+	    <string>Device 認證過後, 輸入帳密即可獲取你的健康存摺點數！</string>
+	
+	
+		          <key>answerNumber_01</key>
+					<string>1</string>
+					<key>maxNumber_01</key>
+					<string>6</string>
+					<key>minNumber_01</key>
+					<string>3</string>
+		           
+		           <key>answerNumber_02</key>
+					<string>2</string>
+					<key>maxNumber_02</key>
+					<string>7</string>
+					<key>minNumber_02</key>
+					<string>4</string>
+
+		           <key>answerNumber_03</key>
+					<string>3</string>
+					<key>maxNumber_03</key>
+					<string>8</string>
+					<key>minNumber_03</key>
+					<string>5</string>
+		           
+		           <key>answerNumber_04</key>
+					<string>4</string>
+					<key>maxNumber_04</key>
+					<string>9</string>
+					<key>minNumber_04</key>
+					<string>6</string>
+		 
+		           <key>answerNumber_05</key>
+					<string>5</string>
+					<key>maxNumber_05</key>
+					<string>10</string>
+					<key>minNumber_05</key>
+					<string>7</string>
+</dict>

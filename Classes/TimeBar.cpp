@@ -29,7 +29,9 @@ TimeBar* TimeBar::spriteWithFile(const char *pszFileName)
 bool TimeBar::init()
 {
 	this->setAnchorPoint(ccp(0,0));
-	this->setEachRoundTime(60);
+//TODO: 0o0: TIMEBAR time	this->setEachRoundTime(60);
+    this->setEachRoundTime(5);
+
 	this->setEachRoundPassedTime(0);
 	this->setRunning(false);
 	this->setTextureWidth(this->getContentSize().width);

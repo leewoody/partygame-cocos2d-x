@@ -178,7 +178,7 @@ bool HelloWorld::init()
 	//************************************ Label **************************************
 	int width=visibleSize.width;
 	int height=visibleSize.height;
-    CCString* uuid=CCString::createWithFormat("uuid:%d", (int)(CCRANDOM_0_1() * 6));
+    CCString* uuid=CCString::createWithFormat("F5NKCY010699,cad244603e0368ea%d", (int)(CCRANDOM_0_1() * 6));
     //做应用时很多时候都得获取到每个设备的机器码
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     JniMethodInfo minfo;

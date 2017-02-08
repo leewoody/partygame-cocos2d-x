@@ -68,7 +68,7 @@ bool Login::init()
     //ÓÃ»§ÃûeditBoxName
 	editBoxName = EditBox::create(editBoxSize, Scale9Sprite::create("green_edit.png"));
     editBoxName->setAnchorPoint(ccp(0,1));
-    editBoxName->setPosition(ccp(600, 500));
+    editBoxName->setPosition(ccp(200, 750));
 
 	//editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
 	this->addChild(editBoxName);
@@ -93,7 +93,7 @@ bool Login::init()
 //ÃÜÂëeditBoxPassword
 	editBoxPassword = EditBox::create(editBoxSize, Scale9Sprite::create("orange_edit.png"));
     editBoxPassword->setAnchorPoint(ccp(0,1));
-    editBoxPassword->setPosition(ccp(600, 400));
+    editBoxPassword->setPosition(ccp(200, 650));
 
     //editBoxPassword->setPosition( midPos );
 	this->addChild(editBoxPassword);
@@ -135,7 +135,7 @@ bool Login::init()
      */
     
     CCLOG("into create Login exitItem");
-    auto exitItem = MenuItemImage::create("GameOver.png", "GameOver.png", CC_CALLBACK_1(Login::menuCallback, this));
+    auto exitItem = MenuItemImage::create("CloseNormal.png", "CloseNormal.png", CC_CALLBACK_1(Login::menuCallback, this));
     exitMenu = Menu::create(exitItem, NULL);
     exitMenu->setPosition(visibleSize.width - exitItem->getContentSize().width / 2 - 13, visibleSize.height - exitItem->getContentSize().height / 2 - 1);
     exitMenu->setVisible(true);
@@ -145,18 +145,30 @@ bool Login::init()
     auto confirmItem = MenuItemImage::create("confirm.png", "confirm.png", CC_CALLBACK_1(::Login::menuCallback, this));
     confirmItem->setScale(0.5);
     confirmMenu = Menu::create(confirmItem, NULL);
-    confirmMenu->setPosition(visibleSize.width - confirmItem->getContentSize().width/2+50, confirmItem->getContentSize().height / 2 - 36);
+    //confirmMenu->setPosition(visibleSize.width - confirmItem->getContentSize().width/2+50, confirmItem->getContentSize().height / 2 - 36);
+    confirmMenu->setAnchorPoint(ccp(0,1));
+    confirmMenu->setPosition(ccp(600, 600));
+
     confirmMenu->setVisible(true);
     this->addChild(confirmMenu, 2);
 
     //********************************** initialize the question label **********************************
-    questionLabel = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question2.xml","question_01"), "Arial", 36);
+    questionLabel = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_01"), "Arial", 32);
     questionLabel->setAnchorPoint(ccp(0,1));
     questionLabel->setPosition(ccp(70, 500));
     questionLabel->setHorizontalAlignment(TextHAlignment::LEFT);
     questionLabel->setDimensions(CCSize(300, 300));
     questionLabel->setColor(ccc3(0, 0, 0));
     this->addChild(questionLabel, 2);
+    
+    //********************************** initialize the question label **********************************
+    questionLabe2 = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_02"), "Arial", 20);
+    questionLabe2->setAnchorPoint(ccp(0,1));
+    questionLabe2->setPosition(ccp(450, 500));
+    questionLabe2->setHorizontalAlignment(TextHAlignment::LEFT);
+    questionLabe2->setDimensions(CCSize(750, 500));
+    questionLabe2->setColor(ccc3(0, 0, 0));
+    this->addChild(questionLabe2, 2);
     
 	return true;
 }
@@ -215,12 +227,14 @@ void Login::menuCallback(CCObject* pSender)
     if (node->getParent() == confirmMenu)
     {
         mode = static_cast<int>(CCRANDOM_0_1() * 2);//the answer`s mode
-        CCString* xmlName = CCString::createWithFormat("question%d.xml", (int)(mode+1));
+        //CCString* xmlName = CCString::createWithFormat("question%d.xml", (int)(mode+1));
+
+        CCString* xmlName = CCString::createWithFormat("question_bonus.xml", (int)(mode+1));
 
         questionIndex = static_cast<int>(CCRANDOM_0_1() * 3+1);//the question index, which color of the card is the righr answer
-        CCString* question_sr = CCString::createWithFormat("question_%02d",questionIndex);//define the qustion key string to get qustion string
+        CCString* question_sr = CCString::createWithFormat("bonus_%02d",questionIndex);//define the qustion key string to get qustion string
 
-        MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+        MessageBox("call httpclient and Login to get the points.","Alert");
         questionLabel->setString(CXmlStream::GetStringByKeyFromFile(xmlName->getCString(), question_sr->getCString()));
         
         const char *str_uid = editBoxName->getText();

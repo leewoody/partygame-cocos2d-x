@@ -31,6 +31,7 @@ public:
 
     //question label
     cocos2d::CCLabelTTF* questionLabel;
+    cocos2d::CCLabelTTF* questionLabe2;
 
     CCMenu* exitMenu;
     CCMenu* confirmMenu;

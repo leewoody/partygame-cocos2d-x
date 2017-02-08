@@ -6,3 +6,4 @@ proj.android/gen
 proj.android/obj
 cocos2d/build/cocos2d_libs.xcodeproj/xcuserdata
 proj.ios_mac/HitOne.xcodeproj/xcuserdata/i_woodylee.xcuserdatad/xcschemes
+libcocos2dcpp.so

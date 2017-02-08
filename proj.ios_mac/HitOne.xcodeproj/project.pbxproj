@@ -64,6 +64,8 @@
 		888BC7741E49C67F0005A33C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7701E49C67F0005A33C /* Icon.png */; };
 		888BC7751E49C67F0005A33C /* orange_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7711E49C67F0005A33C /* orange_edit.png */; };
 		888BC7761E49C67F0005A33C /* yellow_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7721E49C67F0005A33C /* yellow_edit.png */; };
+		888BC7781E4AB5C40005A33C /* question_tips.xml in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7771E4AB5C40005A33C /* question_tips.xml */; };
+		888BC77A1E4ABCEE0005A33C /* question_bonus.xml in Resources */ = {isa = PBXBuildFile; fileRef = 888BC7791E4ABCEE0005A33C /* question_bonus.xml */; };
 		88AB63C31E1CE7290021E1B3 /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AD1E1CE7290021E1B3 /* Animal.cpp */; };
 		88AB63C41E1CE7290021E1B3 /* Animal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AD1E1CE7290021E1B3 /* Animal.cpp */; };
 		88AB63C51E1CE7290021E1B3 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AB63AF1E1CE7290021E1B3 /* AppDelegate.cpp */; };
@@ -349,6 +351,8 @@
 		888BC7701E49C67F0005A33C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		888BC7711E49C67F0005A33C /* orange_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange_edit.png; sourceTree = "<group>"; };
 		888BC7721E49C67F0005A33C /* yellow_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_edit.png; sourceTree = "<group>"; };
+		888BC7771E4AB5C40005A33C /* question_tips.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = question_tips.xml; sourceTree = "<group>"; };
+		888BC7791E4ABCEE0005A33C /* question_bonus.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = question_bonus.xml; sourceTree = "<group>"; };
 		88AB63AD1E1CE7290021E1B3 /* Animal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Animal.cpp; path = ../Classes/Animal.cpp; sourceTree = "<group>"; };
 		88AB63AE1E1CE7290021E1B3 /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = ../Classes/Animal.h; sourceTree = "<group>"; };
 		88AB63AF1E1CE7290021E1B3 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -673,6 +677,7 @@
 				88AB64051E1CEAD00021E1B3 /* CloseSelected.png */,
 				88AB64061E1CEAD00021E1B3 /* confirm.png */,
 				88AB64071E1CEAD00021E1B3 /* Continue.png */,
+				888BC7791E4ABCEE0005A33C /* question_bonus.xml */,
 				88AB64081E1CEAD00021E1B3 /* Continue1.png */,
 				88AB64091E1CEAD00021E1B3 /* correct.png */,
 				88AB640C1E1CEAD10021E1B3 /* game_a_item.png */,
@@ -698,6 +703,7 @@
 				88AB64201E1CEAD10021E1B3 /* hit.wav */,
 				88AB64211E1CEAD10021E1B3 /* layout-04.png */,
 				88AB64221E1CEAD10021E1B3 /* prompt.wav */,
+				888BC7771E4AB5C40005A33C /* question_tips.xml */,
 				88AB64961E1CEAD10021E1B3 /* question.xml */,
 				88AB64971E1CEAD10021E1B3 /* question1.xml */,
 				88AB64981E1CEAD10021E1B3 /* question2.xml */,
@@ -943,6 +949,7 @@
 				88AB65451E1CEAD10021E1B3 /* correct.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				88AB65411E1CEAD10021E1B3 /* CloseSelected.png in Resources */,
+				888BC7781E4AB5C40005A33C /* question_tips.xml in Resources */,
 				88AB65291E1CEAD10021E1B3 /* bg_cover.png in Resources */,
 				88AB65581E1CEAD10021E1B3 /* hit_02.wav in Resources */,
 				88AB65531E1CEAD10021E1B3 /* HelloWorld.png in Resources */,
@@ -960,6 +967,7 @@
 				88AB65521E1CEAD10021E1B3 /* hammer.png in Resources */,
 				88AB65C71E1CEAD10021E1B3 /* start_level.png in Resources */,
 				88AB65491E1CEAD10021E1B3 /* game_b_exit.png in Resources */,
+				888BC77A1E4ABCEE0005A33C /* question_bonus.xml in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				88AB652C1E1CEAD10021E1B3 /* bg.wav in Resources */,
 				88AB655D1E1CEAD10021E1B3 /* prompt.wav in Resources */,
