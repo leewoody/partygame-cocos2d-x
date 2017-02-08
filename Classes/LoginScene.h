@@ -17,8 +17,18 @@ public:
     void menuCallback(CCObject* pSender);
     CREATE_FUNC(Login);
 	
+    EditBox* editBoxName;
+    EditBox* editBoxPassword;
+
     Size visibleSize;
-    
+    CCString* uid;
+    CCString* pwd;
+
+
+    int questionIndex = 1;//the questionIdex means the qustion`s index,normally is which color of the card is the answer
+
+    int mode = 0;//0 represent disorder,1 represent order
+
     //question label
     cocos2d::CCLabelTTF* questionLabel;
 

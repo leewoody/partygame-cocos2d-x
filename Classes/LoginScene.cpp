@@ -44,7 +44,7 @@ bool Login::init()
 	
 
 //编辑框尺寸大小
-	CCSize editBoxSize = CCSizeMake(mysize.width /10, 60);
+	CCSize editBoxSize = CCSizeMake(mysize.width /5, 60);
 
 
     CCSprite* spBackground_01 = CCSprite::create("bg_b.png");
@@ -54,6 +54,7 @@ bool Login::init()
     //spBackground_01->setVisible(false);
     this->addChild(spBackground_01, 0);
     
+    /*
     CCSprite* stateBar = CCSprite::create("StateBar.png");
     //stateBar->setAnchorPoint(ccp(0.5,0));
     stateBar->setVisible(true);
@@ -62,11 +63,14 @@ bool Login::init()
     //stateBar->setScale(1.5f);
     //stateBar->setTextureRect(CCRectMake(0,0,300,200));
     this->addChild(stateBar, 1);
+     */
 
-    
-//用户名editBoxName
-	EditBox* editBoxName = EditBox::create(editBoxSize, Scale9Sprite::create("green_edit.png"));
-	editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
+    //用户名editBoxName
+	editBoxName = EditBox::create(editBoxSize, Scale9Sprite::create("green_edit.png"));
+    editBoxName->setAnchorPoint(ccp(0,1));
+    editBoxName->setPosition(ccp(600, 500));
+
+	//editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
 	this->addChild(editBoxName);
 
 	//属性设置
@@ -75,7 +79,7 @@ bool Login::init()
 	editBoxName->setFontColor(ccRED);
 	editBoxName->setPlaceHolder("Name:");
 	editBoxName->setPlaceholderFontColor(ccWHITE);
-	editBoxName->setMaxLength(8);
+	editBoxName->setMaxLength(30);
 
 	//模式类型设置
     editBoxName->setInputMode(EditBox::InputMode::SINGLE_LINE);
@@ -87,15 +91,18 @@ bool Login::init()
 
 
 //密码editBoxPassword
-	EditBox* editBoxPassword = EditBox::create(editBoxSize, Scale9Sprite::create("orange_edit.png"));
-	editBoxPassword->setPosition( midPos );
+	editBoxPassword = EditBox::create(editBoxSize, Scale9Sprite::create("orange_edit.png"));
+    editBoxPassword->setAnchorPoint(ccp(0,1));
+    editBoxPassword->setPosition(ccp(600, 400));
+
+    //editBoxPassword->setPosition( midPos );
 	this->addChild(editBoxPassword);
 
 	//属性设置
 	editBoxPassword->setFont("fonts/Marker Felt.ttf", 30);
 	editBoxPassword->setFontColor(ccGREEN);
 	editBoxPassword->setPlaceHolder("Password:");
-	editBoxPassword->setMaxLength(6);
+	editBoxPassword->setMaxLength(30);
 
 	//模式设置
     editBoxPassword->setInputFlag(EditBox::InputFlag::PASSWORD);
@@ -105,9 +112,13 @@ bool Login::init()
 	editBoxPassword->setDelegate(this);
 	
 
+    /*
 //邮箱editBoxEmail
 	EditBox* editBoxEmail = EditBox::create(editBoxSize, Scale9Sprite::create("yellow_edit.png"));
-	editBoxEmail->setPosition( ccp(mysize.width/2, mysize.height/4) );
+    editBoxEmail->setAnchorPoint(ccp(0,1));
+    editBoxEmail->setPosition(ccp(600, 300));
+
+    //editBoxEmail->setPosition( ccp(mysize.width/2, mysize.height/4) );
 	this->addChild(editBoxEmail);
 
 	//属性设置
@@ -121,8 +132,10 @@ bool Login::init()
 	//委托代理对象this
 	editBoxEmail->setDelegate(this);
 
+     */
+    
     CCLOG("into create Login exitItem");
-    auto exitItem = MenuItemImage::create("game_b_exit.png", "game_b_exit.png", CC_CALLBACK_1(Login::menuCallback, this));
+    auto exitItem = MenuItemImage::create("GameOver.png", "GameOver.png", CC_CALLBACK_1(Login::menuCallback, this));
     exitMenu = Menu::create(exitItem, NULL);
     exitMenu->setPosition(visibleSize.width - exitItem->getContentSize().width / 2 - 13, visibleSize.height - exitItem->getContentSize().height / 2 - 1);
     exitMenu->setVisible(true);
@@ -152,13 +165,15 @@ bool Login::init()
 //开始编辑
 void Login::editBoxEditingDidBegin(EditBox* editBox)
 {
-	CCLog("editBox %p DidBegin !", editBox);
+    CCLog("editBox %p DidBegin !", editBox);
 }
 
 //结束编辑
 void Login::editBoxEditingDidEnd(EditBox* editBox)
 {
-	CCLog("editBox %p DidEnd !", editBox);
+    const char *str = editBox->getText();
+    
+	CCLog("editBox %p DidEnd !:%s", editBox, str);
 }
 
 //编辑框内容改变
@@ -199,6 +214,20 @@ void Login::menuCallback(CCObject* pSender)
     }
     if (node->getParent() == confirmMenu)
     {
+        mode = static_cast<int>(CCRANDOM_0_1() * 2);//the answer`s mode
+        CCString* xmlName = CCString::createWithFormat("question%d.xml", (int)(mode+1));
+
+        questionIndex = static_cast<int>(CCRANDOM_0_1() * 3+1);//the question index, which color of the card is the righr answer
+        CCString* question_sr = CCString::createWithFormat("question_%02d",questionIndex);//define the qustion key string to get qustion string
+
         MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+        questionLabel->setString(CXmlStream::GetStringByKeyFromFile(xmlName->getCString(), question_sr->getCString()));
+        
+        const char *str_uid = editBoxName->getText();
+        const char *str_pwd = editBoxPassword->getText();
+        
+        CCLog("editBox :%s, %s", str_uid, str_pwd);
+
     }
+    
 }

@@ -36,11 +36,13 @@ bool StartScene::init()
     //spBackground_01->setVisible(false);
     this->addChild(spBackground_01, 0);
     
+    /*
     auto game_center_item = MenuItemImage::create("game_a_item.png", "game_a_item.png", CC_CALLBACK_1(StartScene::menuCallBack, this));
     game_center_menu = Menu::create(game_center_item, NULL);
     game_center_item->setAnchorPoint(ccp(0, 0));
     game_center_menu->setPosition(200,200);
     this->addChild(game_center_menu, 2);
+    */
     
     auto game_a_item = MenuItemImage::create("game_a_item.png", "game_a_item.png", CC_CALLBACK_1(StartScene::menuCallBack, this));
     game_a_menu = Menu::create(game_a_item, NULL);
@@ -142,11 +144,14 @@ void StartScene::menuCallBack(cocos2d::Ref* pSender)
         game_start_menu->setVisible(true);
         
     }
+    /*
     if (node->getParent() == game_center_menu)
     {
         CCTransitionScene* transition = CCTransitionFlipAngular::create(1.2f, VisionScene::createScene());
         CCDirector::sharedDirector()->replaceScene(transition);
     }
+    */
+    
     if (node->getParent() == game_a_menu)
     {
         CCTransitionScene* transition = CCTransitionFlipAngular::create(1.2f, VisionScene::createScene());
