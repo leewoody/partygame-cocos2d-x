@@ -1,0 +1,8 @@
+cocos2d/cocos/2d/platform/android/java/gen
+cocos2d/cocos/2d/platform/android/java/bin
+nhisdkV2
+proj.android/bin
+proj.android/gen
+proj.android/obj
+cocos2d/build/cocos2d_libs.xcodeproj/xcuserdata
+proj.ios_mac/HitOne.xcodeproj/xcuserdata/i_woodylee.xcuserdatad/xcschemes
