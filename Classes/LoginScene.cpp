@@ -2,6 +2,8 @@
 #include "StartScene.h"
 #include "CXmlStream.h"
 
+#include "HTTPManager.h"
+
 USING_NS_CC;
 
 
@@ -34,16 +36,16 @@ bool Login::init()
 
     visibleSize=Director::getInstance()->getVisibleSize();
     
-//»ñÈ¡¿ÉÊÓÇøÓò³ß´ç´óÐ¡
+//èŽ·å–å¯è§†åŒºåŸŸå°ºå¯¸å¤§å°
 	CCSize mysize = CCDirector::sharedDirector()->getVisibleSize();
-//»ñÈ¡¿ÉÊÓÇøÓòµÄÔ­µãÎ»ÖÃ
+//èŽ·å–å¯è§†åŒºåŸŸçš„åŽŸç‚¹ä½ç½®
 	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-//ÆÁÄ»ÕýÖÐÐÄÎ»ÖÃ
+//å±å¹•æ­£ä¸­å¿ƒä½ç½®
 	CCPoint midPos = ccp(mysize.width/2, mysize.height/2);
 
-	
 
-//±à¼­¿ò³ß´ç´óÐ¡
+
+//ç¼–è¾‘æ¡†å°ºå¯¸å¤§å°
 	CCSize editBoxSize = CCSizeMake(mysize.width /5, 60);
 
 
@@ -53,7 +55,7 @@ bool Login::init()
     //spBackground_01->setScale(1);
     //spBackground_01->setVisible(false);
     this->addChild(spBackground_01, 0);
-    
+
     /*
     CCSprite* stateBar = CCSprite::create("StateBar.png");
     //stateBar->setAnchorPoint(ccp(0.5,0));
@@ -65,15 +67,15 @@ bool Login::init()
     this->addChild(stateBar, 1);
      */
 
-    //ÓÃ»§ÃûeditBoxName
+    //ç”¨æˆ·åeditBoxName
 	editBoxName = EditBox::create(editBoxSize, Scale9Sprite::create("green_edit.png"));
     editBoxName->setAnchorPoint(ccp(0,1));
     editBoxName->setPosition(ccp(200, 750));
 
-	//editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
-	this->addChild(editBoxName);
+    //editBoxName->setPosition( ccp(mysize.width/2, mysize.height*3/4) );
+    this->addChild(editBoxName);
 
-	//ÊôÐÔÉèÖÃ
+	//å±žæ€§è®¾ç½®
 	editBoxName->setFontName("fonts/Paint Boy.ttf");
 	editBoxName->setFontSize(20);
 	editBoxName->setFontColor(ccRED);
@@ -81,66 +83,66 @@ bool Login::init()
 	editBoxName->setPlaceholderFontColor(ccWHITE);
 	editBoxName->setMaxLength(30);
 
-	//Ä£Ê½ÀàÐÍÉèÖÃ
+	//æ¨¡å¼ç±»åž‹è®¾ç½®
     editBoxName->setInputMode(EditBox::InputMode::SINGLE_LINE);
     editBoxName->setInputFlag(EditBox::InputFlag::INTIAL_CAPS_ALL_CHARACTERS);
     editBoxName->setReturnType(EditBox::KeyboardReturnType::DEFAULT);
 
-	//Î¯ÍÐ´úÀí¶ÔÏóthis
+	//å§”æ‰˜ä»£ç†å¯¹è±¡this
 	editBoxName->setDelegate(this);
 
 
-//ÃÜÂëeditBoxPassword
+//å¯†ç editBoxPassword
 	editBoxPassword = EditBox::create(editBoxSize, Scale9Sprite::create("orange_edit.png"));
     editBoxPassword->setAnchorPoint(ccp(0,1));
     editBoxPassword->setPosition(ccp(200, 650));
 
     //editBoxPassword->setPosition( midPos );
-	this->addChild(editBoxPassword);
+    this->addChild(editBoxPassword);
 
-	//ÊôÐÔÉèÖÃ
+	//å±žæ€§è®¾ç½®
 	editBoxPassword->setFont("fonts/Marker Felt.ttf", 30);
 	editBoxPassword->setFontColor(ccGREEN);
 	editBoxPassword->setPlaceHolder("Password:");
 	editBoxPassword->setMaxLength(30);
 
-	//Ä£Ê½ÉèÖÃ
+	//æ¨¡å¼è®¾ç½®
     editBoxPassword->setInputFlag(EditBox::InputFlag::PASSWORD);
     editBoxPassword->setReturnType(EditBox::KeyboardReturnType::DONE);
 
-	//Î¯ÍÐ´úÀí¶ÔÏóthis
+	//å§”æ‰˜ä»£ç†å¯¹è±¡this
 	editBoxPassword->setDelegate(this);
 	
 
     /*
-//ÓÊÏäeditBoxEmail
+//é‚®ç®±editBoxEmail
 	EditBox* editBoxEmail = EditBox::create(editBoxSize, Scale9Sprite::create("yellow_edit.png"));
     editBoxEmail->setAnchorPoint(ccp(0,1));
     editBoxEmail->setPosition(ccp(600, 300));
 
     //editBoxEmail->setPosition( ccp(mysize.width/2, mysize.height/4) );
-	this->addChild(editBoxEmail);
+    this->addChild(editBoxEmail);
 
-	//ÊôÐÔÉèÖÃ
+	//å±žæ€§è®¾ç½®
 	editBoxEmail->setFont("fonts/Marker Felt.ttf", 30);
 	editBoxEmail->setPlaceHolder("Email:");
 
-	//Ä£Ê½ÀàÐÍÉèÖÃ
+	//æ¨¡å¼ç±»åž‹è®¾ç½®
     editBoxEmail->setInputMode(EditBox::InputMode::EMAIL_ADDRESS);
     editBoxEmail->setReturnType(EditBox::KeyboardReturnType::SEND);
 
-	//Î¯ÍÐ´úÀí¶ÔÏóthis
+	//å§”æ‰˜ä»£ç†å¯¹è±¡this
 	editBoxEmail->setDelegate(this);
 
      */
-    
+
     CCLOG("into create Login exitItem");
     auto exitItem = MenuItemImage::create("CloseNormal.png", "CloseNormal.png", CC_CALLBACK_1(Login::menuCallback, this));
     exitMenu = Menu::create(exitItem, NULL);
     exitMenu->setPosition(visibleSize.width - exitItem->getContentSize().width / 2 - 13, visibleSize.height - exitItem->getContentSize().height / 2 - 1);
     exitMenu->setVisible(true);
     this->addChild(exitMenu, 2);
-    
+
     CCLOG("into create Login exitItem");
     auto confirmItem = MenuItemImage::create("confirm.png", "confirm.png", CC_CALLBACK_1(::Login::menuCallback, this));
     confirmItem->setScale(0.5);
@@ -160,7 +162,7 @@ bool Login::init()
     questionLabel->setDimensions(CCSize(300, 300));
     questionLabel->setColor(ccc3(0, 0, 0));
     this->addChild(questionLabel, 2);
-    
+
     //********************************** initialize the question label **********************************
     questionLabe2 = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_02"), "Arial", 20);
     questionLabe2->setAnchorPoint(ccp(0,1));
@@ -169,44 +171,44 @@ bool Login::init()
     questionLabe2->setDimensions(CCSize(750, 500));
     questionLabe2->setColor(ccc3(0, 0, 0));
     this->addChild(questionLabe2, 2);
-    
-	return true;
+
+    return true;
 }
 
 
-//¿ªÊ¼±à¼­
+//å¼€å§‹ç¼–è¾‘
 void Login::editBoxEditingDidBegin(EditBox* editBox)
 {
     CCLog("editBox %p DidBegin !", editBox);
 }
 
-//½áÊø±à¼­
+//ç»“æŸç¼–è¾‘
 void Login::editBoxEditingDidEnd(EditBox* editBox)
 {
     const char *str = editBox->getText();
-    
-	CCLog("editBox %p DidEnd !:%s", editBox, str);
+
+    CCLog("editBox %p DidEnd !:%s", editBox, str);
 }
 
-//±à¼­¿òÄÚÈÝ¸Ä±ä
+//ç¼–è¾‘æ¡†å†…å®¹æ”¹å˜
 void Login::editBoxTextChanged(EditBox* editBox, const std::string& text)
 {
-	CCLog("editBox %p TextChanged, text: %s ", editBox, text.c_str());
+    CCLog("editBox %p TextChanged, text: %s ", editBox, text.c_str());
 }
 
-//´¥·¢return·µ»Ø
+//è§¦å‘returnè¿”å›ž
 void Login::editBoxReturn(EditBox* editBox)
 {
-	CCLog("editBox %p was returned !",editBox);
+    CCLog("editBox %p was returned !",editBox);
 }
 
 
-//¹Ø±Õ³ÌÐò
+//å…³é—­ç¨‹åº
 void Login::menuCallback(CCObject* pSender)
 {
 #if 0
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
-	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+    CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
 #else
     CCDirector::sharedDirector()->end();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -216,7 +218,7 @@ void Login::menuCallback(CCObject* pSender)
 #endif
 
     CCNode* node = (CCNode*)pSender;
-    
+
     if (node->getParent() == exitMenu)
     {
         CCScene* scene = StartScene::createScene();
@@ -236,12 +238,89 @@ void Login::menuCallback(CCObject* pSender)
 
         MessageBox("call httpclient and Login to get the points.","Alert");
         questionLabel->setString(CXmlStream::GetStringByKeyFromFile(xmlName->getCString(), question_sr->getCString()));
-        
+
         const char *str_uid = editBoxName->getText();
         const char *str_pwd = editBoxPassword->getText();
-        
+
         CCLog("editBox :%s, %s", str_uid, str_pwd);
 
+        auto httpManager = new HTTPManager();
+        httpManager->retain();
+        httpManager->setHttpDelegate(this);
+        httpManager->sendGetRequest("https://cloudicweb.nhi.gov.tw/nhiapp/service/app_accountlogin.ashx", "update_time");
+
     }
-    
+
+}
+
+void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response)
+{
+    if (strcmp(response->getHttpRequest()->getTag(), "update_time") == 0)
+    {
+        writeFileFromRequest(response,"qwe.json");
+            log("ä¸‹è½½æ›´æ–°åŒ…");
+        std::string version = "version";
+        std::string table = "version";
+        if (!(strcmp(version.c_str(), table.c_str()) == 0))
+        {
+                log("ä¸‹è½½æ›´æ–°åŒ…");
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+
+#endif
+        }
+
+
+    }
+
+
+    if (strcmp(response->getHttpRequest()->getTag(), "update_mobile") == 0)
+    {
+
+        log("update_mobile");
+    }
+
+}
+
+void Login::writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename)
+{
+    //ï¿½ï¿½Ó¡ http headerï¿½ï¿½Ï¢
+    std::vector<char>* buffer0 = response->getResponseHeader();
+    printf("Http Test,dump header:");
+    std::string path0= FileUtils::getInstance()->getWritablePath();
+    std::string fullPath0 =  path0 + filename + ".header";
+    FILE* fp0 = fopen(fullPath0.c_str(), "wb");
+
+
+    log("ï¿½ï¿½ï¿½Ä¼ï¿½Ð´ï¿½ë±¾ï¿½ï¿½ %s",fullPath0.c_str());
+
+    unsigned char bf0;
+    for (unsigned int i  = 0; i < buffer0->size(); i++) {
+
+        bf0 = buffer0->at(i);
+        fwrite(&bf0, 1, 1, fp0);
+
+    }
+    fclose(fp0);
+
+    std::vector<char>* buffer = response->getResponseData();
+    printf("Http Test,dump data:");
+    std::string path= FileUtils::getInstance()->getWritablePath();
+    std::string fullPath =  path + filename;
+    FILE* fp = fopen(fullPath.c_str(), "wb");
+
+
+    log("å°†æ–‡ä»¶å†™å…¥æœ¬åœ° %s",fullPath.c_str());
+    //    auto size = buffer->size();
+    //    unsigned char bf[size];
+    //    fwrite(bf, size, 1, fp);
+
+    unsigned char bf;
+    for (unsigned int i  = 0; i < buffer->size(); i++) {
+
+        bf = buffer->at(i);
+        fwrite(&bf, 1, 1, fp);
+
+    }
+    fclose(fp);
+
 }

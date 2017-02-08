@@ -7,7 +7,9 @@ using namespace cocos2d;
 #include "cocos-ext.h"
 using namespace cocos2d::extension;
 
-class Login : public cocos2d::CCLayer,EditBoxDelegate
+#include "HTTPManager.h"
+
+class Login : public cocos2d::CCLayer,EditBoxDelegate,public HTTPManagerDelegate
 {
 public:
     virtual bool init();  
@@ -40,6 +42,12 @@ public:
 	virtual void editBoxEditingDidEnd(EditBox* editBox); //结束编辑
 	virtual void editBoxTextChanged(EditBox* editBox, const std::string& text); //编辑框文字改变
 	virtual void editBoxReturn(EditBox* editBox); //触发return后的回调函数
+    
+    virtual void onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response) ;
+    
+    void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
+
+
 };
 
 #endif // __Login_SCENE_H__
