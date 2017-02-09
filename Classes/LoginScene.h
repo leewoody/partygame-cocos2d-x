@@ -50,6 +50,7 @@ private:
     
     void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
     void LoginProcess();
+    void ProcessToken(std::string strResult);
 
 };
 

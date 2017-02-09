@@ -3,6 +3,8 @@
 #include "CXmlStream.h"
 
 #include "HTTPManager.h"
+#include "json/rapidjson.h"
+#include "json/document.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include <jni.h>
@@ -339,21 +341,20 @@ void Login::LoginProcess()
     httpManager->sendPostRequest(SERVICE_LoginCheck2, "login", postData->getCString() );
 }
 
-/*
- {"IsProcessOK":true,"ReturnCode":"0000","Message":"正確","Token":"428E01x18276s0421C22621Z360f0i024W58Hd2j2J9B72m3a","Account":null,"InsType":null}
- */
-
 void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response)
 {
     if (strcmp(response->getHttpRequest()->getTag(), "login") == 0)
     {
-        writeFileFromRequest(response,"qwe.json");
         CCLOG("Get success");
+        
+        writeFileFromRequest(response,"qwe.json");
         std::vector<char>* buffer = response->getResponseData();
         std::string res;
         res.insert(res.begin(), buffer->begin(), buffer->end());
         
         tipLabel->setString(res);
+        ProcessToken(res);
+        
     }
 }
 
@@ -403,4 +404,32 @@ void Login::writeFileFromRequest(cocos2d::network::HttpResponse *response,std::s
     }
     fclose(fp);
 
+}
+
+/*
+ {"IsProcessOK":true,"ReturnCode":"0000","Message":"正確","Token":"428E01x18276s0421C22621Z360f0i024W58Hd2j2J9B72m3a","Account":null,"InsType":null}
+*/
+
+void Login::ProcessToken(std::string strResult)
+{
+    //std::string str = "{\"hello\" : \"word\"}";
+    //CCLOG("%s\n", strResult.c_str());
+    rapidjson::Document d;
+    d.Parse<0>(strResult.c_str());
+    if (d.HasParseError())  //打印解析错误
+    {
+        CCLOG("GetParseError %s\n",d.GetParseError());
+    }
+    
+    if (d.IsObject() && d.HasMember("IsProcessOK") && d.HasMember("ReturnCode")) {
+        
+        CCLOG("%d, %s\n", d["IsProcessOK"].GetBool(), d["ReturnCode"].GetString() );//打印获取hello的值
+        std::string strReturnCode =d["ReturnCode"].GetString();
+        if(strReturnCode == "0000")
+        {
+            CCLOG("Token: %s\n", d["Token"].GetString());//打印获取hello的值
+            //ProcessSession
+        }
+        
+    }
 }
