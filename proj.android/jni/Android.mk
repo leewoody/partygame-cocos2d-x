@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/StartScene.cpp\
                     ../../Classes/VisionScene.cpp\
                     ../../Classes/LoginScene.cpp\
+                    ../../Classes/HTTPManager.cpp\
                     ../../Classes/CollisionDetection.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
@@ -27,6 +28,7 @@ LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
 LOCAL_WHOLE_STATIC_LIBRARIES += box2d_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocos_network_static
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -34,3 +36,5 @@ $(call import-module,2d)
 $(call import-module,audio/android)
 $(call import-module,Box2D)
 $(call import-module,extensions)
+$(call import-module,network)
+
