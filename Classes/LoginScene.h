@@ -26,7 +26,9 @@ public:
     CCString* uid;
     CCString* pwd;
 
-
+    std::string strUUID;
+    std::string strToken;
+    
     int questionIndex = 1;//the questionIdex means the qustion`s index,normally is which color of the card is the answer
 
     int mode = 0;//0 represent disorder,1 represent order
@@ -50,8 +52,11 @@ private:
     
     void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
     void LoginProcess();
+    void SessionProcess(std::string sToken, std::string sActId);
     void ProcessToken(std::string strResult);
-
+    void DataProcess(std::string sToken, std::string sActId);
+    void DataProcess2(std::string sToken, std::string sActId);
+    
 };
 
 #endif // __Login_SCENE_H__

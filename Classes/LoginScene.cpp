@@ -28,12 +28,15 @@ std::string SERVICEUrl = "https://cloudicweb.nhi.gov.tw/nhiapp/";
 std::string SERVICE_LoginCheck2 = SERVICEUrl + "service/app_accountlogin.ashx";
 
 std::string HealthPassbookSignUpUrl = "https://med.nhi.gov.tw/ihke2000/IHKE2000S01.aspx";
+std::string HealthDataUrl1          = "https://med.nhi.gov.tw/IHKE8000/IHKE8109s01.aspx";
+std::string HealthDataUrl2          = "https://med.nhi.gov.tw/IHKE8000/IHKE8202S01.aspx";
 
 std::string sKey_PARAM = "ServiceKey";
 std::string acc_PARAM = "Account";
 std::string pass_PARAM = "PassPort";
 std::string act_PARAM = "ActId";
 std::string device_PARAM = "DeviceID";
+std::string token_PARAM = "Token";
 
 Scene* Login::createScene()
 {
@@ -328,7 +331,7 @@ void Login::LoginProcess()
         log("JniHelper::getMethodInfo error...");
     }
 #endif
-    
+    strUUID=uuid->getCString();
     CCString* postData=CCString::createWithFormat("%s=%s&%s=%s&%s=%s&%s=%s&%s=", sKey_PARAM.c_str(), Service_Key.c_str(), acc_PARAM.c_str(), str_uid, pass_PARAM.c_str(), str_pwd, act_PARAM.c_str(), uuid->getCString(), device_PARAM.c_str());
     
     //const char* postData = "ServiceKey=fd%@$rw15902!&Account=d121146818&PassPort=d121146818&ActId=F5NKCY010699,cad244603e0368ea&DeviceID=";
@@ -354,6 +357,45 @@ void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, 
         
         tipLabel->setString(res);
         ProcessToken(res);
+        
+    }
+    if (strcmp(response->getHttpRequest()->getTag(), "session") == 0)
+    {
+        CCLOG("Get success");
+        
+        writeFileFromRequest(response,"session.html");
+        std::vector<char>* buffer = response->getResponseData();
+        std::string res;
+        res.insert(res.begin(), buffer->begin(), buffer->end());
+        
+        tipLabel->setString(res);
+        DataProcess(strToken,strUUID);
+        
+    }
+    if (strcmp(response->getHttpRequest()->getTag(), "HealthDataUrl1") == 0)
+    {
+        CCLOG("Get success");
+        
+        writeFileFromRequest(response,"HealthDataUrl1.html");
+        std::vector<char>* buffer = response->getResponseData();
+        std::string res;
+        res.insert(res.begin(), buffer->begin(), buffer->end());
+        
+        //tipLabel->setString(res);
+        DataProcess2(strToken,strUUID);
+        
+    }
+    if (strcmp(response->getHttpRequest()->getTag(), "HealthDataUrl2") == 0)
+    {
+        CCLOG("Get success");
+        
+        writeFileFromRequest(response,"HealthDataUrl2.html");
+        std::vector<char>* buffer = response->getResponseData();
+        std::string res;
+        res.insert(res.begin(), buffer->begin(), buffer->end());
+        
+        //tipLabel->setString(res);
+        //DataProcess(strToken,strUUID);
         
     }
 }
@@ -428,8 +470,57 @@ void Login::ProcessToken(std::string strResult)
         if(strReturnCode == "0000")
         {
             CCLOG("Token: %s\n", d["Token"].GetString());//打印获取hello的值
-            //ProcessSession
+            strToken=d["Token"].GetString();
+            SessionProcess(strToken,strUUID);
         }
         
     }
+}
+
+void Login::SessionProcess(std::string sToken, std::string sActId)
+{
+    CCString* postData=CCString::createWithFormat("%s=%s&%s=%s", token_PARAM.c_str(), sToken.c_str(), act_PARAM.c_str(), sActId.c_str());
+    
+    //const char* postData = "ServiceKey=fd%@$rw15902!&Account=d121146818&PassPort=d121146818&ActId=F5NKCY010699,cad244603e0368ea&DeviceID=";
+    
+    log("SessionProcess postData:%s", postData->getCString() );
+    
+    auto httpManager = new HTTPManager();
+    httpManager->retain();
+    httpManager->setHttpDelegate(this);
+    httpManager->sendPostRequest(HealthPassbookSignUpUrl, "session", postData->getCString() );
+
+    
+}
+
+void Login::DataProcess(std::string sToken, std::string sActId)
+{
+    CCString* postData=CCString::createWithFormat("%s=%s&%s=%s", token_PARAM.c_str(), sToken.c_str(), act_PARAM.c_str(), sActId.c_str());
+    
+    //const char* postData = "ServiceKey=fd%@$rw15902!&Account=d121146818&PassPort=d121146818&ActId=F5NKCY010699,cad244603e0368ea&DeviceID=";
+    
+    log("DataProcess postData:%s", postData->getCString() );
+    
+    auto httpManager = new HTTPManager();
+    httpManager->retain();
+    httpManager->setHttpDelegate(this);
+    httpManager->sendPostRequest(HealthDataUrl1, "HealthDataUrl1", postData->getCString() );
+    
+    
+}
+
+void Login::DataProcess2(std::string sToken, std::string sActId)
+{
+    CCString* postData=CCString::createWithFormat("%s=%s&%s=%s", token_PARAM.c_str(), sToken.c_str(), act_PARAM.c_str(), sActId.c_str());
+    
+    //const char* postData = "ServiceKey=fd%@$rw15902!&Account=d121146818&PassPort=d121146818&ActId=F5NKCY010699,cad244603e0368ea&DeviceID=";
+    
+    log("DataProcess2 postData:%s", postData->getCString() );
+    
+    auto httpManager = new HTTPManager();
+    httpManager->retain();
+    httpManager->setHttpDelegate(this);
+    httpManager->sendPostRequest(HealthDataUrl2, "HealthDataUrl2", postData->getCString() );
+    
+    
 }
