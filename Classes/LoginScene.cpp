@@ -155,7 +155,7 @@ bool Login::init()
     this->addChild(confirmMenu, 2);
 
     //********************************** initialize the question label **********************************
-    questionLabel = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_01"), "Arial", 32);
+    questionLabel = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_01"), "fonts/Paint Boy.ttf", 32);
     questionLabel->setAnchorPoint(ccp(0,1));
     questionLabel->setPosition(ccp(70, 500));
     questionLabel->setHorizontalAlignment(TextHAlignment::LEFT);
@@ -164,7 +164,7 @@ bool Login::init()
     this->addChild(questionLabel, 2);
 
     //********************************** initialize the question label **********************************
-    questionLabe2 = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_02"), "Arial", 20);
+    questionLabe2 = CCLabelTTF::create(CXmlStream::GetStringByKeyFromFile("question_tips.xml","question_02"), "fonts/Paint Boy.ttf", 20);
     questionLabe2->setAnchorPoint(ccp(0,1));
     questionLabe2->setPosition(ccp(450, 500));
     questionLabe2->setHorizontalAlignment(TextHAlignment::LEFT);
@@ -283,15 +283,15 @@ void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, 
 
 void Login::writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename)
 {
-    //��ӡ http header��Ϣ
+    //http header
     std::vector<char>* buffer0 = response->getResponseHeader();
-    printf("Http Test,dump header:");
+    printf("Http Test,dump header:\n");
     std::string path0= FileUtils::getInstance()->getWritablePath();
     std::string fullPath0 =  path0 + filename + ".header";
     FILE* fp0 = fopen(fullPath0.c_str(), "wb");
 
 
-    log("���ļ�д�뱾�� %s",fullPath0.c_str());
+    log("writeFileFromRequest %s",fullPath0.c_str());
 
     unsigned char bf0;
     for (unsigned int i  = 0; i < buffer0->size(); i++) {
@@ -303,7 +303,7 @@ void Login::writeFileFromRequest(cocos2d::network::HttpResponse *response,std::s
     fclose(fp0);
 
     std::vector<char>* buffer = response->getResponseData();
-    printf("Http Test,dump data:");
+    printf("Http Test,dump data:\n");
     std::string path= FileUtils::getInstance()->getWritablePath();
     std::string fullPath =  path + filename;
     FILE* fp = fopen(fullPath.c_str(), "wb");

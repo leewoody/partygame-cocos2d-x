@@ -29,6 +29,7 @@ void HTTPManager::sendGetRequest(std::string url,std::string requestTag)
     request->setResponseCallback(this, httpresponse_selector(HTTPManager::onHttpRequestCompleted));
 
     request->setTag(requestTag.c_str());//设置Tag
+    network::HttpClient::getInstance()->enableCookies(NULL);
     network::HttpClient::getInstance()->send(request);//添加到HttpClient任务队列
     request->release();//释放连接
 }
