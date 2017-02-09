@@ -31,7 +31,9 @@ public:
     void onHttpRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response);
     void getFormData(std::string parameter);
     void sendGetRequest(std::string url,std::string requestTag);
-    void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
+    void sendPostRequest(std::string url,std::string requestTag,const char* postData);
+
+    //void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
     typedef std::function<void(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response)> ccHttpManagerCallback;
     void addHttpListener(ccHttpManagerCallback& callback);
 

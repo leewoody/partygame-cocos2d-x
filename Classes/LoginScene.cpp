@@ -4,8 +4,34 @@
 
 #include "HTTPManager.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include <jni.h>
+//cocos2d/cocos/2d/platform/android/jni/JniHelper.cpp
+#include "../cocos2d/cocos/2d/platform/android/jni/JniHelper.h" //这里的路径要根据你工程的实际情况进行更改
+#include <android/log.h>
+
+#if 1
+#define  LOG_TAG    "JniHelper"
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#else
+#define  LOGD(...)
+#endif
+
+#endif
+
 USING_NS_CC;
 
+std::string Service_Key="fd%@$rw15902!";
+std::string SERVICEUrl = "https://cloudicweb.nhi.gov.tw/nhiapp/";
+std::string SERVICE_LoginCheck2 = SERVICEUrl + "service/app_accountlogin.ashx";
+
+std::string HealthPassbookSignUpUrl = "https://med.nhi.gov.tw/ihke2000/IHKE2000S01.aspx";
+
+std::string sKey_PARAM = "ServiceKey";
+std::string acc_PARAM = "Account";
+std::string pass_PARAM = "PassPort";
+std::string act_PARAM = "ActId";
+std::string device_PARAM = "DeviceID";
 
 Scene* Login::createScene()
 {
@@ -172,6 +198,15 @@ bool Login::init()
     questionLabe2->setColor(ccc3(0, 0, 0));
     this->addChild(questionLabe2, 2);
 
+    //********************************** initialize the tip label **********************************
+    tipLabel = CCLabelTTF::create("Tips", "fonts/Paint Boy.ttf", 22);
+    tipLabel->setAnchorPoint(ccp(0,1));
+    tipLabel->setPosition(ccp(680, 750));
+    tipLabel->setHorizontalAlignment(TextHAlignment::LEFT);
+    tipLabel->setDimensions(CCSize(500, 500));
+    tipLabel->setColor(ccc3(100, 100, 100));
+    this->addChild(tipLabel, 2);
+
     return true;
 }
 
@@ -228,6 +263,8 @@ void Login::menuCallback(CCObject* pSender)
     }
     if (node->getParent() == confirmMenu)
     {
+        tipLabel->setString("Tips: Login...");
+        
         mode = static_cast<int>(CCRANDOM_0_1() * 2);//the answer`s mode
         //CCString* xmlName = CCString::createWithFormat("question%d.xml", (int)(mode+1));
 
@@ -236,88 +273,131 @@ void Login::menuCallback(CCObject* pSender)
         questionIndex = static_cast<int>(CCRANDOM_0_1() * 3+1);//the question index, which color of the card is the righr answer
         CCString* question_sr = CCString::createWithFormat("bonus_%02d",questionIndex);//define the qustion key string to get qustion string
 
-        MessageBox("call httpclient and Login to get the points.","Alert");
+        //MessageBox("call httpclient and Login to get the points.","Alert");
         questionLabel->setString(CXmlStream::GetStringByKeyFromFile(xmlName->getCString(), question_sr->getCString()));
 
-        const char *str_uid = editBoxName->getText();
-        const char *str_pwd = editBoxPassword->getText();
-
-        CCLog("editBox :%s, %s", str_uid, str_pwd);
-
-        auto httpManager = new HTTPManager();
-        httpManager->retain();
-        httpManager->setHttpDelegate(this);
-        httpManager->sendGetRequest("https://cloudicweb.nhi.gov.tw/nhiapp/service/app_accountlogin.ashx", "update_time");
-
+        LoginProcess();
+        
     }
 
 }
 
+void Login::LoginProcess()
+{
+    
+    const char *str_uid = editBoxName->getText();
+    const char *str_pwd = editBoxPassword->getText();
+    
+    int uid_len=strlen(str_uid);
+    int pwd_len=strlen(str_pwd);
+    if(uid_len == 0 || pwd_len == 0)
+    {
+        tipLabel->setString("Tips: Please enter the UID/PWD...");
+        return;
+        
+    }
+    
+    CCString* uuid=CCString::createWithFormat("F5NKCY010699,cad244603e0368ea");
+    //做应用时很多时候都得获取到每个设备的机器码
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    JniMethodInfo minfo;
+    jobject jobj;
+    //getStaticMethodInfo方法是调用静态类的，也可以不用调用静态类的getMethodInfo
+    bool b = JniHelper::getStaticMethodInfo(minfo,
+                                            "org.cocos2dx.cpp.AppActivity", //类路径
+                                            "getUUID", //静态方法名
+                                            "()Ljava/lang/String;");//括号里的是参数，后面的是返回值。
+    log("CC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROIDCC_PLATFORM_ANDROID");
+    if(b)
+    {
+        std::string ret;
+        //std::string uuid;
+        
+        jstring jret = (jstring)minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
+        ret = JniHelper::jstring2string(jret);
+        minfo.env->DeleteLocalRef(jret);
+        minfo.env->DeleteLocalRef(minfo.classID);
+        
+        uuid=CCString::createWithFormat("%s", ret.c_str());
+        
+    }
+    else
+    {
+        log("JniHelper::getMethodInfo error...");
+    }
+#endif
+    
+    CCString* postData=CCString::createWithFormat("%s=%s&%s=%s&%s=%s&%s=%s&%s=", sKey_PARAM.c_str(), Service_Key.c_str(), acc_PARAM.c_str(), str_uid, pass_PARAM.c_str(), str_pwd, act_PARAM.c_str(), uuid->getCString(), device_PARAM.c_str());
+    
+    //const char* postData = "ServiceKey=fd%@$rw15902!&Account=d121146818&PassPort=d121146818&ActId=F5NKCY010699,cad244603e0368ea&DeviceID=";
+    
+    log("postData:%s", postData->getCString() );
+    
+    auto httpManager = new HTTPManager();
+    httpManager->retain();
+    httpManager->setHttpDelegate(this);
+    httpManager->sendPostRequest(SERVICE_LoginCheck2, "login", postData->getCString() );
+}
+
+/*
+ {"IsProcessOK":true,"ReturnCode":"0000","Message":"正確","Token":"428E01x18276s0421C22621Z360f0i024W58Hd2j2J9B72m3a","Account":null,"InsType":null}
+ */
+
 void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response)
 {
-    if (strcmp(response->getHttpRequest()->getTag(), "update_time") == 0)
+    if (strcmp(response->getHttpRequest()->getTag(), "login") == 0)
     {
         writeFileFromRequest(response,"qwe.json");
-            log("下载更新包");
-        std::string version = "version";
-        std::string table = "version";
-        if (!(strcmp(version.c_str(), table.c_str()) == 0))
-        {
-                log("下载更新包");
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
-#endif
-        }
-
-
+        CCLOG("Get success");
+        std::vector<char>* buffer = response->getResponseData();
+        std::string res;
+        res.insert(res.begin(), buffer->begin(), buffer->end());
+        
+        tipLabel->setString(res);
     }
-
-
-    if (strcmp(response->getHttpRequest()->getTag(), "update_mobile") == 0)
-    {
-
-        log("update_mobile");
-    }
-
 }
 
 void Login::writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename)
 {
     //http header
     std::vector<char>* buffer0 = response->getResponseHeader();
-    printf("Http Test,dump header:\n");
     std::string path0= FileUtils::getInstance()->getWritablePath();
     std::string fullPath0 =  path0 + filename + ".header";
     FILE* fp0 = fopen(fullPath0.c_str(), "wb");
 
+    log("header writeFileFromRequest %s",fullPath0.c_str());
 
-    log("writeFileFromRequest %s",fullPath0.c_str());
-
+    std::string resHeader;
+    resHeader.insert(resHeader.begin(), buffer0->begin(), buffer0->end());
+    log("\nHttp Test,dump header:\n%s\n", resHeader.c_str());
+    
     unsigned char bf0;
     for (unsigned int i  = 0; i < buffer0->size(); i++) {
 
         bf0 = buffer0->at(i);
+        //printf("%c", bf0);
         fwrite(&bf0, 1, 1, fp0);
 
     }
     fclose(fp0);
 
     std::vector<char>* buffer = response->getResponseData();
-    printf("Http Test,dump data:\n");
     std::string path= FileUtils::getInstance()->getWritablePath();
     std::string fullPath =  path + filename;
     FILE* fp = fopen(fullPath.c_str(), "wb");
 
 
-    log("将文件写入本地 %s",fullPath.c_str());
-    //    auto size = buffer->size();
-    //    unsigned char bf[size];
-    //    fwrite(bf, size, 1, fp);
-
+    log("data writeFileFromRequest %s",fullPath.c_str());
+    
+    std::string resData;
+    resData.insert(resData.begin(), buffer->begin(), buffer->end());
+    log("\nHttp Test,dump data:\n%s\n", resData.c_str());
+    
     unsigned char bf;
     for (unsigned int i  = 0; i < buffer->size(); i++) {
 
         bf = buffer->at(i);
+        //printf("%c", bf);
         fwrite(&bf, 1, 1, fp);
 
     }

@@ -34,7 +34,8 @@ public:
     //question label
     cocos2d::CCLabelTTF* questionLabel;
     cocos2d::CCLabelTTF* questionLabe2;
-
+    cocos2d::CCLabelTTF* tipLabel;
+    
     CCMenu* exitMenu;
     CCMenu* confirmMenu;
     
@@ -45,8 +46,10 @@ public:
     
     virtual void onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, cocos2d::network::HttpResponse *response) ;
     
+private:
+    
     void writeFileFromRequest(cocos2d::network::HttpResponse *response,std::string filename);
-
+    void LoginProcess();
 
 };
 
