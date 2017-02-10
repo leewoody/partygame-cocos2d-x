@@ -273,7 +273,7 @@ void Login::menuCallback(CCObject* pSender)
         mode = static_cast<int>(CCRANDOM_0_1() * 2);//the answer`s mode
         //CCString* xmlName = CCString::createWithFormat("question%d.xml", (int)(mode+1));
 
-        CCString* xmlName = CCString::createWithFormat("question_bonus.xml", (int)(mode+1));
+        CCString* xmlName = CCString::createWithFormat("question_bonus.xml");
 
         questionIndex = static_cast<int>(CCRANDOM_0_1() * 3+1);//the question index, which color of the card is the righr answer
         CCString* question_sr = CCString::createWithFormat("bonus_%02d",questionIndex);//define the qustion key string to get qustion string
@@ -374,7 +374,7 @@ void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, 
     }
     if (strcmp(response->getHttpRequest()->getTag(), "HealthDataUrl1") == 0)
     {
-        CCLOG("Get success");
+        CCLOG("HealthDataUrl1 Get success");
         
         writeFileFromRequest(response,"HealthDataUrl1.html");
         std::vector<char>* buffer = response->getResponseData();
@@ -387,7 +387,7 @@ void Login::onHttpManagerRequestCompleted(cocos2d::network::HttpClient *sender, 
     }
     if (strcmp(response->getHttpRequest()->getTag(), "HealthDataUrl2") == 0)
     {
-        CCLOG("Get success");
+        CCLOG("HealthDataUrl2 Get success");
         
         writeFileFromRequest(response,"HealthDataUrl2.html");
         std::vector<char>* buffer = response->getResponseData();
