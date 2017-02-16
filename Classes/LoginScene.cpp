@@ -23,20 +23,20 @@
 
 USING_NS_CC;
 
-std::string Service_Key="fd%@$rw15902!";
-std::string SERVICEUrl = "https://cloudicweb.nhi.gov.tw/nhiapp/";
-std::string SERVICE_LoginCheck2 = SERVICEUrl + "service/app_accountlogin.ashx";
+std::string Service_Key="";
+std::string SERVICEUrl = "";
+std::string SERVICE_LoginCheck2 = SERVICEUrl + "";
 
-std::string HealthPassbookSignUpUrl = "https://med.nhi.gov.tw/ihke2000/IHKE2000S01.aspx";
-std::string HealthDataUrl1          = "https://med.nhi.gov.tw/IHKE8000/IHKE8109s01.aspx";
-std::string HealthDataUrl2          = "https://med.nhi.gov.tw/IHKE8000/IHKE8202S01.aspx";
+std::string HealthPassbookSignUpUrl = "";
+std::string HealthDataUrl1          = "";
+std::string HealthDataUrl2          = "";
 
-std::string sKey_PARAM = "ServiceKey";
-std::string acc_PARAM = "Account";
-std::string pass_PARAM = "PassPort";
-std::string act_PARAM = "ActId";
-std::string device_PARAM = "DeviceID";
-std::string token_PARAM = "Token";
+std::string sKey_PARAM = "";
+std::string acc_PARAM = "";
+std::string pass_PARAM = "";
+std::string act_PARAM = "";
+std::string device_PARAM = "";
+std::string token_PARAM = "";
 
 Scene* Login::createScene()
 {
